@@ -1,0 +1,12 @@
+<ActionBar title="SMS List">
+</ActionBar>
+
+<side-drawer-page>
+    <<GridLayout class="home-page p-30">
+        <ListView [items]="items" class="small-spacing">
+            <template let-item="item">
+                <Label [text]="item.name" class="medium-spacing"></Label>
+            </template>
+        </ListView>
+        </GridLayout>>
+</side-drawer-page>

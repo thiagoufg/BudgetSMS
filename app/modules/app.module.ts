@@ -4,7 +4,7 @@ import { NativeScriptModule } from "nativescript-angular/platform";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { SmsListComponent } from './sms/sms-list.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { SharedModule } from './shared';
@@ -17,7 +17,7 @@ import { SharedModule } from './shared';
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
+    SmsListComponent,
     AboutComponent,
     ContactComponent
   ],
