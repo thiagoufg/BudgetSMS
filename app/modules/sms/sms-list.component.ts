@@ -1,3 +1,4 @@
+import { GroupMessages } from '../../util/GroupMessages';
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import * as TNSInbox from 'nativescript-sms-inbox';
 
@@ -18,12 +19,22 @@ export class SmsListComponent implements OnInit {
   }
 
   public getInboxMessages() { //fromNumber = "0712345678"
-    TNSInbox.getInboxes({ max: 2000 }).then((res) => {
-
-      this.items = res.data
-      .filter((msg)=>{  return msg.message.match(/bradesco/gi); })
-      .map((res) => { return { name: res.message }; });
-    }, (err) => { console.log(err); });
+    TNSInbox.getInboxes
+    (
+      { max: 300 }).then
+      (
+        (res) => 
+        {
+          let grouper = new GroupMessages();
+          this.items = grouper.doGroup
+          (
+            res.data
+            .filter((msg)=>{  return msg.message.match(/bradesco/gi); })
+            .map((res) => { return res.message; })
+          ).map((res)=>{return {name:res}});
+        }, 
+        (err) => { console.log(err); }
+      );
 
   }
 }
