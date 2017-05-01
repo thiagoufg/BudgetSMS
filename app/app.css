@@ -16,3 +16,10 @@ refer to http://docs.nativescript.org/ui/theme.
    vertical-align: center;
    text-align: center;
 }
+
+.small-spacing {
+  margin: 5;
+}
+.medium-spacing {
+  margin: 10;
+}

@@ -18,11 +18,11 @@ export class SmsListComponent implements OnInit {
   }
 
   public getInboxMessages() { //fromNumber = "0712345678"
-    TNSInbox.getInboxes({ max: 20 }).then((res) => {
+    TNSInbox.getInboxes({ max: 2000 }).then((res) => {
 
-      let resposta: Array<Object> = res.data;
-      this.items = resposta.map((res) => { return { name: res['message'] }; });
-      console.dump(this.items);
+      this.items = res.data
+      .filter((msg)=>{  return msg.message.match(/bradesco/gi); })
+      .map((res) => { return { name: res.message }; });
     }, (err) => { console.log(err); });
 
   }
