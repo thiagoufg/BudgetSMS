@@ -2,11 +2,11 @@
 </ActionBar>
 
 <side-drawer-page>
-    <<GridLayout class="home-page p-30">
-        <ListView [items]="items" class="small-spacing">
+    <GridLayout class="home-page p-30" style="padding:0px; margin:0px; border:0px;">
+        <ListView [items]="items" class="small-spacing" style="padding:0px; margin:0px; border:0px;">
             <template let-item="item">
-                <Label [text]="item.name" class="medium-spacing"></Label>
+                <Label [text]="item.name" class="medium-spacing" style="white-space:normal" textWrap="true"></Label>
             </template>
         </ListView>
-        </GridLayout>>
+    </GridLayout>
 </side-drawer-page>

@@ -23,3 +23,8 @@ refer to http://docs.nativescript.org/ui/theme.
 .medium-spacing {
   margin: 10;
 }
+
+.km-scrollview > * > *
+{
+    white-space: normal;
+}

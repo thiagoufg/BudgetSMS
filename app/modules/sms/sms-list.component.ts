@@ -19,9 +19,7 @@ export class SmsListComponent implements OnInit {
   }
 
   public getInboxMessages() { //fromNumber = "0712345678"
-    TNSInbox.getInboxes
-    (
-      { max: 300 }).then
+    TNSInbox.getInboxes({ max: 100 }).then
       (
         (res) => 
         {
@@ -32,6 +30,7 @@ export class SmsListComponent implements OnInit {
             .filter((msg)=>{  return msg.message.match(/bradesco/gi); })
             .map((res) => { return res.message; })
           ).map((res)=>{return {name:res}});
+          console.log("Fim do agrupamento de mensagens");
         }, 
         (err) => { console.log(err); }
       );
