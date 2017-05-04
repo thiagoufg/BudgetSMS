@@ -40,3 +40,9 @@ https://github.com/shripalsoni04/nativescript-angular-drawer-template
 
 #Reading SMS
 tns plugin add nativescript-sms-inbox
+
+#Intercepting incoming sms
+Change AndroidManifest
+npm install tns-platform-declarations --save-dev
+edit /references.d.ts including:
+/// <reference path="./node_modules/tns-platform-declarations/android.d.ts" /> Needed for autocompletion and compilation.

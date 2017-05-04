@@ -19,6 +19,7 @@ export class SmsListComponent implements OnInit {
   }
 
   public getInboxMessages() { //fromNumber = "0712345678"
+  
     TNSInbox.getInboxes({ max: 100 }).then
       (
         (res) => 
