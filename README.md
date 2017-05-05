@@ -38,10 +38,10 @@ tns plugin add nativescript-telerik-ui
 https://www.npmjs.com/package/nativescript-angular-drawer-template
 https://github.com/shripalsoni04/nativescript-angular-drawer-template
 
-#Reading SMS
+## Reading SMS
 tns plugin add nativescript-sms-inbox
 
-#Intercepting incoming sms
+## Intercepting incoming sms
 Change AndroidManifest
 npm install tns-platform-declarations --save-dev
 edit /references.d.ts including:
