@@ -9,8 +9,8 @@ import { ContactComponent } from './contact/contact.component';
 @NgModule({
   imports: [
     NativeScriptRouterModule.forRoot([
-      { path: '', component: SmsListComponent },
-      { path: 'about', component: AboutComponent },
+      { path: '', component: AboutComponent },
+      { path: 'sms', component: SmsListComponent },
       { path: 'contact', component: ContactComponent }
     ])
   ],
