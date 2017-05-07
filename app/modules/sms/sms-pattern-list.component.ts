@@ -1,5 +1,6 @@
+import { OnInit } from '@angular/core';
+import { DataBase } from './../shared/sqlite/db';
 import { Component } from '@angular/core';
-var Sqlite = require("nativescript-sqlite");
 @Component
 (
     {
@@ -7,69 +8,58 @@ var Sqlite = require("nativescript-sqlite");
         templateUrl:"modules/sms/sms-pattern-list.html"
     }
 )
-export class SmsPatternList 
+export class SmsPatternList implements OnInit
 {
 
-    public db: any;
-    public people: Array<any>;
+    public transactions: Array<any>;
 
-    public constructor()
+    public constructor(public db: DataBase)
     {
-        this.connect("BudgetSMS.db");
+        this.db.connect("BudgetSMS.db");
     }
 
-    public connect(dbname: string)
+    public ngOnInit()
     {
-        if(dbname===null)
-        {
-            dbname="BudgetSMS.db";
-        }
-        if (!Sqlite.exists(dbname)) {
-            //Sqlite.copyDatabase(dbname);
-        }
-        (new Sqlite(dbname)).then
+        this.fetch();
+    }
+
+    public insert() 
+    {
+        this.db.execWithParams("INSERT INTO transactions (name, amount) VALUES (?, ?)", ["Nic", "Raboy"]).then
         (
-            db => 
+            id => 
             {
-                db.execSQL("CREATE TABLE IF NOT EXISTS people (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT)").then
-                (
-                    id => 
-                    {
-                        this.db = db;
-                    }, 
-                    error => 
-                    {
-                        console.log("CREATE TABLE ERROR", error);
-                    }
-                );
+                console.log("INSERT RESULT", id);
+                this.fetch();
             }, 
             error => 
             {
-                console.log("OPEN DB ERROR", error);
+                console.log("INSERT ERROR", error);
             }
         );
     }
-
-    public insert() {
-        this.db.execSQL("INSERT INTO people (firstname, lastname) VALUES (?, ?)", ["Nic", "Raboy"]).then(id => {
-            console.log("INSERT RESULT", id);
-            this.fetch();
-        }, error => {
-            console.log("INSERT ERROR", error);
-        });
-    }
  
     public fetch() {
-        this.db.all("SELECT * FROM people").then(rows => {
-            this.people = [];
-            for(var row in rows) {
-                this.people.push({
-                    "firstname": rows[row][1],
-                    "lastname": rows[row][2]
-                });
+        this.db.all("SELECT * FROM transactions").then
+        (
+            rows => 
+            {
+                this.transactions = [];
+                for(var row in rows) 
+                {
+                    this.transactions.push
+                    (
+                        {
+                            "name": rows[row][1],
+                            "amount": rows[row][2]
+                        }
+                    );
+                }
+            }, 
+            error => 
+            {
+                console.log("SELECT ERROR", error);
             }
-        }, error => {
-            console.log("SELECT ERROR", error);
-        });
+        );
     }
 }

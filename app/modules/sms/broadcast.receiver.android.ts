@@ -1,8 +1,9 @@
 import * as application from "application";
+var Sqlite = require("nativescript-sqlite");
 
 //@JavaProxy("IncomingSmsBroadcastReceiver")
 @JavaProxy("com.xxxxx.beeper.broadcastreceivers.IncomingSmsBroadcastReceiver")
-class IncomingSmsBroadcastReceiver extends android.content.BroadcastReceiver   {
+class IncomingSmsBroadcastReceiver extends android.content.BroadcastReceiver {
     public onReceive(context: android.content.Context, intent: android.content.Intent) {
 
         //const utils = require("utils/utils");
@@ -29,14 +30,32 @@ class IncomingSmsBroadcastReceiver extends android.content.BroadcastReceiver   {
 
         for (let i = 0; i < messages.length; i++) {
             const message = android.telephony.SmsMessage.createFromPdu(messages[i] as Array<number>);
-/*
-            if (message.getDisplayOriginatingAddress() === AppConfig.boxPhoneNumber) {
-                const intent = new android.content.Intent(AppConfig.incomingSmsIntent);
-                intent.putExtra("message", message.getMessageBody())
-                context.getApplicationContext().sendBroadcast(intent);
-            }
-*/
-            console.log("SmsReceiver", "senderNum: "+ message.getDisplayOriginatingAddress() + "; message: " + message.getMessageBody());
+            /*
+                        if (message.getDisplayOriginatingAddress() === AppConfig.boxPhoneNumber) {
+                            const intent = new android.content.Intent(AppConfig.incomingSmsIntent);
+                            intent.putExtra("message", message.getMessageBody())
+                            context.getApplicationContext().sendBroadcast(intent);
+                        }
+            */
+            console.log("SmsReceiver", "senderNum: " + message.getDisplayOriginatingAddress() + "; message: " + message.getMessageBody());
+            (new Sqlite("BudgetSMS.db")).then
+                (
+                db => {
+                    db.execSQL("INSERT INTO transactions (name, amount) VALUES (?, ?)", [message.getDisplayOriginatingAddress(), message.getMessageBody()]).then
+                        (
+                        id => {
+                            console.log("INSERT RESULT", id);
+                        },
+                        error => {
+                            console.log("INSERT ERROR", error);
+                        }
+                        )
+                },
+                error => {
+                    console.log("OPEN DB ERROR", error);
+                }
+                );
+
         }
     }
 }

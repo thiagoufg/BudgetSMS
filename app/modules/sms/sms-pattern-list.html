@@ -4,9 +4,9 @@
 </ActionBar>
 <side-drawer-page>
     <StackLayout>
-        <ListView [items]="people">
-            <template let-person="item">
-                <Label text="{{ person.firstname }} {{ person.lastname }}"></Label>
+        <ListView [items]="transactions">
+            <template let-trans="item">
+                <Label text="{{ trans.name }} {{ trans.amount }}"></Label>
             </template>
         </ListView>
     </StackLayout>

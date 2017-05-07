@@ -31,7 +31,7 @@ export class SmsListComponent implements OnInit {
             .filter((msg)=>{  return msg.message.match(/bradesco/gi); })
             .map((res) => { return res.message; })
           ).map((res)=>{return {name:res}});
-          console.log("Fim do agrupamento de mensagens");
+          //console.log("Fim do agrupamento de mensagens");
         }, 
         (err) => { console.log(err); }
       );

@@ -24,7 +24,7 @@ export class GroupMessages {
         let grupos: Array<Array<string>> = <any>(new Array<Array<string>>());
 
         for (let i: number = 0; i < msgs.length; i++) {
-            console.log(msgs[i]);
+            //console.log(msgs[i]);
             let atingiuSimilaridadeMinima: boolean = false;
             for (let grupoN: number = 0; grupoN<grupos.length;grupoN++) {
                 let grupo = grupos[grupoN];
@@ -34,8 +34,8 @@ export class GroupMessages {
                         atingiuSimilaridadeMinima = true;
                         if(grupo.length<10)
                         {
-                            console.log("atingiu similaridade minima");
-                            console.log("adicionado ao grupo "+grupoN+", que agora possui " + grupo.length + " elementos.")
+                            //console.log("atingiu similaridade minima");
+                            //console.log("adicionado ao grupo "+grupoN+", que agora possui " + grupo.length + " elementos.")
                             grupo.unshift(msgs[i]);
                         }
                         break;
@@ -45,13 +45,13 @@ export class GroupMessages {
 
             if (!atingiuSimilaridadeMinima) 
             {
-                console.log("NAO atingiu minimo. adicionando a um novo grupo");
+                //console.log("NAO atingiu minimo. adicionando a um novo grupo");
                 let novoGrupo: Array<string> = <any>(new Array<string>());
                 novoGrupo.unshift(msgs[i]);
                 grupos.unshift(novoGrupo);
             }
         }
-        console.log(grupos.length);
+        //console.log(grupos.length);
         return grupos;
     }
 
