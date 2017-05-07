@@ -1,0 +1,13 @@
+<ActionBar title="SQL App">
+    <ActionItem text="Add" ios.position="right" (tap)="insert()"></ActionItem>
+    <ActionItem text="Refresh" ios.position="left" (tap)="fetch()"></ActionItem>
+</ActionBar>
+<side-drawer-page>
+    <StackLayout>
+        <ListView [items]="people">
+            <template let-person="item">
+                <Label text="{{ person.firstname }} {{ person.lastname }}"></Label>
+            </template>
+        </ListView>
+    </StackLayout>
+<side-drawer-page>

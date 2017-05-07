@@ -38,6 +38,7 @@ export class SideDrawerPageComponent implements AfterViewInit, OnDestroy {
   navMenu: any[] = [
     { name: 'About', commands: ['/'] },
     { name: 'Sms', commands: ['/sms'] },
+    { name: 'Sms Patterns', commands: ['/smspattern'] },
     { name: 'Contact', commands: ['/contact'] }
   ];
 
