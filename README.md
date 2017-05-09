@@ -6,6 +6,10 @@ I assume that you have NativeScript installed on your computer.
 Create the NativeScript project based on a SideDrawer template:
 
 tns create BudgetSMS --template nativescript-angular-drawer-template
+tns platform add android
+npm install tns-platform-declarations --save-dev
+tns plugin add nativescript-sms-inbox
+tns plugin add nativescript-sqlite
 
 ## Testing the project
 First, enable USB debuggin on your device or emulator (like Bluestacks, Memu, AVD, etc).
@@ -32,11 +36,6 @@ git add .
 git commit -m "initial commit"
 git remote add origin https://github.com/thiagoufg/BudgetSMS.git
 git push -u origin master
-
-## Using a SideDrawer (unnecessary because of the template we used)
-tns plugin add nativescript-telerik-ui
-https://www.npmjs.com/package/nativescript-angular-drawer-template
-https://github.com/shripalsoni04/nativescript-angular-drawer-template
 
 ## Reading SMS
 tns plugin add nativescript-sms-inbox

@@ -3,7 +3,7 @@
     <ActionItem text="Refresh" ios.position="left" (tap)="fetch()"></ActionItem>
 </ActionBar>
 <side-drawer-page>
-    <StackLayout>
+    <StackLayout class="home-page p-30" style="padding:0px; margin:0px; border:0px;">
         <ListView [items]="transactions">
             <template let-trans="item">
                 <Label text="{{ trans.name }} {{ trans.amount }}"></Label>
