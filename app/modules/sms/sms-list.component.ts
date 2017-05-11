@@ -1,4 +1,4 @@
-import { GroupMessages } from '../../util/GroupMessages';
+import { GroupMessages } from '../shared/utils/GroupMessages';
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import * as TNSInbox from 'nativescript-sms-inbox';
 

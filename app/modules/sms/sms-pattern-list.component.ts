@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { DataBase } from './../shared/sqlite/db';
+import { DataBase } from '../shared/sqlite/db';
 import { Component } from '@angular/core';
 @Component
 (
@@ -21,6 +21,22 @@ export class SmsPatternList implements OnInit
     public ngOnInit()
     {
         this.fetch();
+    }
+
+    public remove(item)
+    {
+        this.db.execWithParams("DELETE FROM transactions where name=? and amount=?", [item.name, item.amount]).then
+        (
+            res => 
+            {
+                console.log("DELETE RESULT", res);
+                this.fetch();
+            }, 
+            error => 
+            {
+                console.log("DELETE ERROR", error);
+            }
+        );
     }
 
     public insert() 

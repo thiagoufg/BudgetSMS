@@ -6,7 +6,7 @@
     <GridLayout>
         <ListView [items]="transactions">
             <template let-item="item">
-                <Label [text]="item.amount"></Label>
+                <Label [text]="item.amount" class="medium-spacing" (tap)="remove(item)"></Label>
             </template>
         </ListView>
     <GridLayout>
