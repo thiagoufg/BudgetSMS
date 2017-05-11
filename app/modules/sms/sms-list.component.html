@@ -1,9 +1,8 @@
 <ActionBar title="SMS List">
 </ActionBar>
-
 <side-drawer-page>
-    <GridLayout class="home-page p-30" style="padding:0px; margin:0px; border:0px;">
-        <ListView [items]="items" class="small-spacing" style="padding:0px; margin:0px; border:0px;">
+    <GridLayout>
+        <ListView [items]="items">
             <template let-item="item">
                 <Label [text]="item.name" class="medium-spacing" style="white-space:normal" textWrap="true"></Label>
             </template>
