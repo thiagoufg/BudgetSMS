@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { DataBase } from '../shared/sqlite/db';
+import { DataBase } from '../shared/utils/SQLite';
 import { Component } from '@angular/core';
 @Component
 (

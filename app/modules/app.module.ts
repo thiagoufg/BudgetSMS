@@ -1,4 +1,4 @@
-import { DataBase } from './shared/sqlite/db';
+import { DataBase } from './shared/utils/SQLite';
 import { NgModule } from '@angular/core';
 
 import { NativeScriptModule } from "nativescript-angular/platform";
