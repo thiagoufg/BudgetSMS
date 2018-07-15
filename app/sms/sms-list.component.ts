@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as TNSInbox from 'nativescript-sms-inbox';
 import * as app from "application";
+import * as permissions from "nativescript-permissions";
 
 @Component({
   selector: 'home',
@@ -15,10 +16,26 @@ export class SmsListComponent implements OnInit {
   items: Array<Object> = [];
 
   ngOnInit(): void {
-    this.getInboxMessages();
-    this.items.push({ name: "Apples" });
-    this.items.push({ name: "Bananas" });
-    this.items.push({ name: "Oranges" });
+    setTimeout(this.dealWithPermissions.bind(this),1000);
+  }
+  
+  public dealWithPermissions(){
+    const self = this;
+    if(!permissions.hasPermission("android.permission.READ_SMS")) {
+      permissions.requestPermission("android.permission.READ_SMS")
+      .then(() => {
+        self.getInboxMessages();
+      })
+      .catch((error) =>  {
+        alert("Uh oh, no permissions - plan B time!" + JSON.stringify(error));
+        this.items.push({ name: "Apples" });
+        this.items.push({ name: "Bananas" });
+        this.items.push({ name: "Oranges" });
+      });
+    } else {
+      this.getInboxMessages();
+    }
+
   }
 
   public getInboxMessages() { //fromNumber = "0712345678"
@@ -37,7 +54,9 @@ export class SmsListComponent implements OnInit {
           //console.log("Fim do agrupamento de mensagens");
         }, 
         (err) => { console.log(err); }
-      );
+      ).catch((error) => {
+        alert("Error fetching sms: " + error);
+      });
 
   }
 
