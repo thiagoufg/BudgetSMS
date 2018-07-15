@@ -1,5 +1,8 @@
 {
+  "android": {
+    "v8Flags": "--expose_gc"
+  },
   "main": "main.js",
-  "name": "nativescript-angular-drawer-template",
-  "version": "1.2.2"
+  "name": "tns-template-drawer-navigation-ng",
+  "version": "4.1.2"
 }

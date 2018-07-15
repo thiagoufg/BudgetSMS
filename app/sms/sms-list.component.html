@@ -1,0 +1,24 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="SMS Inbox"></Label>
+</ActionBar>
+
+<GridLayout class="home-page p-30" style="padding:0px; margin:0px; border:0px;">
+    <ListView [items]="items" class="small-spacing" style="padding:0px; margin:0px; border:0px;">
+        <ng-template let-item="item">
+            <Label [text]="item.name" class="medium-spacing" style="white-space:normal" textWrap="true"></Label>
+        </ng-template>
+    </ListView>
+</GridLayout>
