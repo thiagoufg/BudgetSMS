@@ -3,7 +3,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 import { SmsRoutingModule } from "./sms-routing.module";
 import { SmsListComponent } from "./sms-list.component";
-import { SmsPatternList } from "./sms-pattern-list.component";
+import { SmsInterceptedList } from "./sms-intercepted-list.component";
 
 
 @NgModule({
@@ -12,7 +12,7 @@ import { SmsPatternList } from "./sms-pattern-list.component";
         SmsRoutingModule
     ],
     declarations: [
-        SmsListComponent, SmsPatternList
+        SmsListComponent, SmsInterceptedList
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -3,12 +3,12 @@ import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { SmsListComponent } from "./sms-list.component";
-import { SmsPatternList } from "./sms-pattern-list.component";
+import { SmsInterceptedList } from "./sms-intercepted-list.component";
 
 
 const routes: Routes = [
     { path: "", component: SmsListComponent },
-    { path: "pattern", component: SmsPatternList },
+    { path: "pattern", component: SmsInterceptedList },
 ];
 
 @NgModule({

@@ -9,10 +9,10 @@ import * as app from "application";
     {
         selector:"",
         moduleId: module.id,
-        templateUrl:"./sms-pattern-list.component.html"
+        templateUrl:"./sms-intercepted-list.component.html"
     }
 )
-export class SmsPatternList implements OnInit
+export class SmsInterceptedList implements OnInit
 {
 
     public transactions: Array<any>;
