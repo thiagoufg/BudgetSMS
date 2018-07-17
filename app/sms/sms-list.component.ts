@@ -16,14 +16,18 @@ export class SmsListComponent implements OnInit {
   items: Array<Object> = [];
 
   ngOnInit(): void {
-    if(!permissions.hasPermission((<any>android).Manifest.permission.RECEIVE_SMS)) {
-      permissions.requestPermission((<any>android).Manifest.permission.RECEIVE_SMS, "I need these permissions because I'm cool")
-      .then(function() {
-        console.log("Woo Hoo, I have the power!");
-        this.getInboxMessages();
+    setTimeout(this.dealWithPermissions.bind(this),1000);
+  }
+  
+  public dealWithPermissions(){
+    const self = this;
+    if(!permissions.hasPermission("android.permission.READ_SMS")) {
+      permissions.requestPermission("android.permission.READ_SMS")
+      .then(() => {
+        self.getInboxMessages();
       })
-      .catch(function() {
-        console.log("Uh oh, no permissions - plan B time!");
+      .catch((error) =>  {
+        alert("Uh oh, no permissions - plan B time!" + JSON.stringify(error));
         this.items.push({ name: "Apples" });
         this.items.push({ name: "Bananas" });
         this.items.push({ name: "Oranges" });
@@ -49,7 +53,9 @@ export class SmsListComponent implements OnInit {
           //console.log("Fim do agrupamento de mensagens");
         }, 
         (err) => { console.log(err); }
-      );
+      ).catch((error) => {
+        alert("Error fetching sms: " + error);
+      });
 
   }
 
