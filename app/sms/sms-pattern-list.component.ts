@@ -8,10 +8,10 @@ import * as permissions from "nativescript-permissions";
 @Component({
   selector: 'home',
   moduleId: module.id,
-  templateUrl: './sms-list.component.html',
+  templateUrl: './sms-pattern-list.component.html',
   //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SmsListComponent implements OnInit {
+export class SmsPatternListComponent implements OnInit {
 
   items: Array<Object> = [];
 
