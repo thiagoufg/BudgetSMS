@@ -19,7 +19,9 @@
 <StackLayout>
     <ListView [items]="transactions">
         <ng-template let-trans="item">
-            <Label text="{{ trans.name }} {{ trans.amount }}"></Label>
+            <Label text="{{ trans.name }} {{ trans.amount }}"
+                class="medium-spacing" style="white-space:normal" textWrap="true"
+            ></Label>
         </ng-template>
     </ListView>
 </StackLayout>

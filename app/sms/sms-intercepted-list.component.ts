@@ -1,6 +1,5 @@
-import { OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataBase } from '../sqlite/db';
-import { Component } from '@angular/core';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "application";
 
