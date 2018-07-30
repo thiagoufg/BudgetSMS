@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewContainerRef } from "@angular/core";
+import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { ModalViewComponent } from "./modal-view";
 import { DataBase } from '../sqlite/db';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { ListPicker } from "ui/list-picker";
@@ -7,38 +9,49 @@ import * as app from "application";
 @Component({
     selector: "Browse",
     moduleId: module.id,
+    providers: [ModalDialogService],
     templateUrl: "./browse.component.html"
 })
 export class BrowseComponent implements OnInit {
 
     public transactions: Array<any>;
-    public selectedMonth;
-    public months;
-    public selectedYear;
-    public years;
-    public showMonthPicker: boolean = false;
-    public showYearPicker: boolean = false;
+    public selectedDate: Date;
     
-    constructor(public db: DataBase) {
+    constructor(public db: DataBase, private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
         this.db.connect("BudgetSMS.db");
-        this.selectedMonth = (new Date()).getMonth();
-        this.months = [1,2,3,4,5,6,7,8,9,10,11,12];
-        this.selectedYear = (new Date()).getFullYear();
-        this.years = Array.apply(null, {length: 100}).map((value,index)=>{return this.selectedYear - 50 + index});
     }
 
     ngOnInit(): void {
         this.fetch();
     }
 
-    public selectedYearIndexChanged(args) {
-        let picker = <ListPicker>args.object;
-        this.selectedYear = picker.selectedIndex;
+    getDate() {
+        this.createModelView().then(result => {
+            if (this.validate(result)) {
+                this.selectedDate = result;
+            }
+        }).catch(error => this.handleError(error));
     }
 
-    public selectedMonthIndexChanged(args) {
-        let picker = <ListPicker>args.object;
-        this.selectedMonth = picker.selectedIndex;
+    private createModelView(): Promise<any> {
+        const today = new Date();
+        const options: ModalDialogOptions = {
+            viewContainerRef: this.vcRef,
+            context: today.toDateString(),
+            fullscreen: false,
+        };
+
+        return this.modalService.showModal(ModalViewComponent, options);
+    }
+
+    private handleError(error: any) {
+        this.selectedDate = new Date();
+        alert("Please try again!");
+        console.dir(error);
+    }
+
+    private validate(result: any) {
+        return !!result;
     }
 
     public insert() 
