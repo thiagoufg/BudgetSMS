@@ -17,14 +17,12 @@
     <Label class="action-bar-title" text="Browse"></Label>
 </ActionBar>
 
-<StackLayout row="0">
-    <Label text="Use the slider to change ListPicker's selectedIndex" textWrap="true" class="h3 p-15 text-left"></Label>
-    <Slider [minValue]="0" [maxValue]="months.length - 1" [(ngModel)]="selectedMonth" class="slider"></Slider>
-    <!--
-    <Label text="Year" textWrap="true" (tap)="toggleShowYearPicker()"
-        class="medium-spacing" style="white-space:normal"
-    ></Label>
-    <Label text="Month" textWrap="true" (tap)="showMonthPicker = !showMonthPicker"></Label>
+<FlexboxLayout flexDirection="column">
+    <FlexboxLayout flexDirection="row" class="p-15">
+        <Label text="status" class="p-15 text-center font-weight-bold" ></Label>
+        <Label flexGrow="1" text="status" class="p-15 text-center font-weight-bold" ></Label>
+        <Label text="status" class="p-15 text-center font-weight-bold" ></Label>
+    </FlexboxLayout>
     <ListView [items]="transactions">
         <ng-template let-trans="item">
             <Label text="{{ trans.name }} {{ trans.amount }}"
@@ -32,7 +30,4 @@
             ></Label>
         </ng-template>
     </ListView>
-    -->
-</StackLayout>
-<!-- <ListPicker row="1" [items]="years" [selectedIndex]="selectedYear" (selectedIndexChange)="selectedYearIndexChanged($event)" class="p-15"></ListPicker> -->
-<ListPicker row="2" [items]="months" [selectedIndex]="selectedMonth" (selectedIndexChange)="selectedMonthIndexChanged($event)"></ListPicker>
+</FlexboxLayout>
