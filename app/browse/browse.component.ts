@@ -19,6 +19,7 @@ export class BrowseComponent implements OnInit {
     
     constructor(public db: DataBase, private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
         this.db.connect("BudgetSMS.db");
+        this.selectedDate = new Date();
     }
 
     ngOnInit(): void {
