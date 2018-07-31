@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { android as androidApp, ios as iosApp } from "application";
 var Sqlite = require("nativescript-sqlite");
-
+import { isDevMode } from '@angular/core';
 @Injectable()
 export class DataBase 
 {
@@ -56,5 +57,9 @@ export class DataBase
     public all(sql: string): Promise<Object>
     {
         return this.db.all(sql);
+    }
+
+    public getDatabasePath(): string {
+        return androidApp.context.getDatabasePath("BudgetSMS.db");
     }
 }
