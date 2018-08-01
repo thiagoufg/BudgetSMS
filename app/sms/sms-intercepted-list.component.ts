@@ -18,7 +18,7 @@ export class SmsInterceptedList implements OnInit
 
     public constructor(public db: DataBase)
     {
-        this.db.connect("BudgetSMS.db");
+        this.db.connect("budget.db");
     }
 
     public ngOnInit()
@@ -28,7 +28,7 @@ export class SmsInterceptedList implements OnInit
 
     public insert() 
     {
-        this.db.execWithParams("INSERT INTO transactions (name, amount) VALUES (?, ?)", ["Nic", "Raboy"]).then
+        this.db.execWithParams("INSERT into transactions (name, value, date, id_user) VALUES (?, ?, ?, ?)", ["Nic", 10, 10000, 1]).then
         (
             id => 
             {
@@ -43,7 +43,7 @@ export class SmsInterceptedList implements OnInit
     }
  
     public fetch() {
-        this.db.all("SELECT * FROM transactions").then
+        this.db.all("SELECT * from transactions").then
         (
             rows => 
             {
@@ -54,7 +54,9 @@ export class SmsInterceptedList implements OnInit
                     (
                         {
                             "name": rows[row][1],
-                            "amount": rows[row][2]
+                            "value": rows[row][2],
+                            "date": rows[row][3],
+                            "id_user": rows[row][4]
                         }
                     );
                 }

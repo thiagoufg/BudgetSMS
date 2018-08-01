@@ -10,10 +10,10 @@ export class DataBase
     {
         if(dbname===null)
         {
-            dbname="BudgetSMS.db";
+            dbname="budget.db";
         }
-        if (!Sqlite.exists(dbname)) {
-            //Sqlite.copyDatabase(dbname);
+        if (isDevMode() || !Sqlite.exists(dbname)) {
+            Sqlite.copyDatabase(dbname);
         }
         (new Sqlite(dbname)).then
         (
@@ -31,6 +31,7 @@ export class DataBase
 
     public checkDbUpdate()
     {
+        /*
         this.exec("CREATE TABLE IF NOT EXISTS transactions (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, amount TEXT)").then
         (
             id => 
@@ -42,6 +43,7 @@ export class DataBase
                 console.log("CREATE TABLE ERROR", error);
             }
         );
+        */
     }
 
     public exec(sql: string): Promise<Object>
@@ -49,7 +51,7 @@ export class DataBase
         return this.db.execSQL(sql);
     }
 
-    public execWithParams(sql: string, params: string[]): Promise<Object>
+    public execWithParams(sql: string, params: (string | number)[]): Promise<Object>
     {
         return this.db.execSQL(sql,params);
     }
@@ -60,6 +62,6 @@ export class DataBase
     }
 
     public getDatabasePath(): string {
-        return androidApp.context.getDatabasePath("BudgetSMS.db");
+        return androidApp.context.getDatabasePath("budget.db");
     }
 }

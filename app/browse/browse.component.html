@@ -25,7 +25,7 @@
     </FlexboxLayout>
     <ListView [items]="transactions">
         <ng-template let-trans="item">
-            <Label text="{{ trans.name }} {{ trans.amount }}"
+            <Label text="{{ trans.name }} {{ trans.value }} {{ trans.date }} {{ trans.id_user }} {{ trans.id_account }} {{ trans.id_category }}"
                 class="medium-spacing" style="white-space:normal" textWrap="true"
             ></Label>
         </ng-template>

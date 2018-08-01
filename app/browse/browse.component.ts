@@ -18,7 +18,7 @@ export class BrowseComponent implements OnInit {
     public selectedDate: Date;
     
     constructor(public db: DataBase, private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
-        this.db.connect("BudgetSMS.db");
+        this.db.connect("budget.db");
         this.selectedDate = new Date();
     }
 
@@ -57,7 +57,7 @@ export class BrowseComponent implements OnInit {
 
     public insert() 
     {
-        this.db.execWithParams("INSERT INTO transactions (name, amount) VALUES (?, ?)", ["Nic", "Raboy"]).then
+        this.db.execWithParams("INSERT into transactions (name, value, date, id_user, id_account, id_category) VALUES (?,?,?,?,?,?)", ["Nic",10,10000,1,1,1]).then
         (
             id => 
             {
@@ -72,7 +72,7 @@ export class BrowseComponent implements OnInit {
     }
  
     public fetch() {
-        this.db.all("SELECT * FROM transactions").then
+        this.db.all("SELECT * from transactions").then
         (
             rows => 
             {
@@ -83,7 +83,11 @@ export class BrowseComponent implements OnInit {
                     (
                         {
                             "name": rows[row][1],
-                            "amount": rows[row][2]
+                            "value": rows[row][2],
+                            "date": rows[row][3],
+                            "id_user": rows[row][4],
+                            "id_account": rows[row][5],
+                            "id_category": rows[row][6]
                         }
                     );
                 }

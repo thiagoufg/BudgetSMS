@@ -38,10 +38,10 @@ class IncomingSmsBroadcastReceiver extends android.content.BroadcastReceiver {
                         }
             */
             console.log("SmsReceiver", "senderNum: " + message.getDisplayOriginatingAddress() + "; message: " + message.getMessageBody());
-            (new Sqlite("BudgetSMS.db")).then
+            (new Sqlite("budget.db")).then
                 (
                 db => {
-                    db.execSQL("INSERT INTO transactions (name, amount) VALUES (?, ?)", [message.getDisplayOriginatingAddress(), message.getMessageBody()]).then
+                    db.execSQL("INSERT into transactionss (name, value, date, id_user) VALUES (?, 1, 1, 1)", [message.getDisplayOriginatingAddress() + message.getMessageBody()]).then
                         (
                         id => {
                             console.log("INSERT RESULT", id);
