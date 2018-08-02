@@ -20,7 +20,7 @@
 <FlexboxLayout flexDirection="column">
     <FlexboxLayout flexDirection="row" class="p-15">
         <Label text="status" class="p-15 text-center font-weight-bold" ></Label>
-        <Label flexGrow="1" class="p-15 text-center font-weight-bold" [text]='selectedDate | date: "MM/dd/yy"' (tap)="getDate()"></Label>
+        <Label flexGrow="1" class="p-15 text-center font-weight-bold" [text]='selectedDate | date: "yyyy-MMMM"' (tap)="getDate()"></Label>
         <Label text="status" class="p-15 text-center font-weight-bold" ></Label>
     </FlexboxLayout>
     <ListView [items]="transactions">

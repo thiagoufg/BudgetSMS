@@ -12,7 +12,8 @@ export class DataBase
         {
             dbname="budget.db";
         }
-        if (isDevMode() || !Sqlite.exists(dbname)) {
+        //if (isDevMode() || !Sqlite.exists(dbname)) {
+        if (!Sqlite.exists(dbname)) {
             Sqlite.copyDatabase(dbname);
         }
         (new Sqlite(dbname)).then
