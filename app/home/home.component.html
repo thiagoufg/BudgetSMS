@@ -14,8 +14,20 @@
     </ActionItem>
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
-
-<GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text="<!-- Page 1 content goes here -->"></Label>
-</GridLayout>
+<StackLayout>
+    <Label text="0,00"></Label>
+    <GridLayout rows="*, *, *, *" columns="*, *, *">
+        <Label text="1" row="0" col="0"></Label>
+        <Label text="2" row="0" col="1"></Label>
+        <Label text="3" row="0" col="2"></Label>
+        <Label text="4" row="1" col="0"></Label>
+        <Label text="5" row="1" col="1"></Label>
+        <Label text="6" row="1" col="2"></Label>
+        <Label text="7" row="2" col="0"></Label>
+        <Label text="8" row="2" col="1"></Label>
+        <Label text="9" row="2" col="2"></Label>
+        <Label text="(+)" row="3" col="0"></Label>
+        <Label text="0" row="3" col="1"></Label>
+        <Label text="<|" row="3" col="2"></Label>
+    </GridLayout>
+</StackLayout>
