@@ -57,6 +57,11 @@ export class DataBase
         return this.db.execSQL(sql,params);
     }
 
+    public selectWithParams(sql: string, params: (string | number)[]): Promise<Object>
+    {
+        return this.db.get(sql, params);
+    }
+
     public all(sql: string): Promise<Object>
     {
         return this.db.all(sql);
