@@ -7,6 +7,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { DataBase } from './sqlite/db';
+import { TransactionService } from "~/shared/services/transaction.service";
+import { TransactionDao } from "./shared/dao/transaction.dao";
 
 @NgModule({
     bootstrap: [
@@ -23,6 +25,6 @@ import { DataBase } from './sqlite/db';
     schemas: [
         NO_ERRORS_SCHEMA
     ],
-    providers: [DataBase, ModalDialogService]
+    providers: [DataBase, ModalDialogService, TransactionService, TransactionDao]
 })
 export class AppModule { }

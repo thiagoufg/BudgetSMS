@@ -6,7 +6,7 @@ import { isDevMode } from '@angular/core';
 export class DataBase 
 {
     public db: any;
-    public connect(dbname: string)
+    public connect(dbname: string = null)
     {
         if(dbname===null)
         {

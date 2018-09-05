@@ -15,19 +15,19 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 <StackLayout>
-    <Label text="0,00"></Label>
+    <Label [text]="currentValue | currency"></Label>
     <GridLayout rows="*, *, *, *" columns="*, *, *">
-        <Label text="1" row="0" col="0"></Label>
-        <Label text="2" row="0" col="1"></Label>
-        <Label text="3" row="0" col="2"></Label>
-        <Label text="4" row="1" col="0"></Label>
-        <Label text="5" row="1" col="1"></Label>
-        <Label text="6" row="1" col="2"></Label>
-        <Label text="7" row="2" col="0"></Label>
-        <Label text="8" row="2" col="1"></Label>
-        <Label text="9" row="2" col="2"></Label>
-        <Label text="(+)" row="3" col="0"></Label>
-        <Label text="0" row="3" col="1"></Label>
-        <Label text="<|" row="3" col="2"></Label>
+        <Button text="1" (tap)="type(1)" row="0" col="0"></Button>
+        <Button text="2" (tap)="type(2)" row="0" col="1"></Button>
+        <Button text="3" (tap)="type(3)" row="0" col="2"></Button>
+        <Button text="4" (tap)="type(4)" row="1" col="0"></Button>
+        <Button text="5" (tap)="type(5)" row="1" col="1"></Button>
+        <Button text="6" (tap)="type(6)" row="1" col="2"></Button>
+        <Button text="7" (tap)="type(7)" row="2" col="0"></Button>
+        <Button text="8" (tap)="type(8)" row="2" col="1"></Button>
+        <Button text="9" (tap)="type(9)" row="2" col="2"></Button>
+        <Button text="(+)" row="3" col="0"></Button>
+        <Button text="0" (tap)="type(0)" row="3" col="1"></Button>
+        <Button text="<|" (tap)="erase()" row="3" col="2"></Button>
     </GridLayout>
 </StackLayout>

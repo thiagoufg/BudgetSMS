@@ -5,6 +5,8 @@ import { DataBase } from '../sqlite/db';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { ListPicker } from "ui/list-picker";
 import * as app from "application";
+import { TransactionService } from '../shared/services/transaction.service';
+import { Transaction } from '../shared/model/transaction';
 
 @Component({
     selector: "Browse",
@@ -17,7 +19,9 @@ export class BrowseComponent implements OnInit {
     public transactions: Array<any>;
     public selectedDate: Date;
     
-    constructor(public db: DataBase, private modalService: ModalDialogService, private vcRef: ViewContainerRef) {
+    constructor(public db: DataBase, private modalService: ModalDialogService, private vcRef: ViewContainerRef,
+        public transactionService: TransactionService
+    ) {
         this.db.connect("budget.db");
         this.selectedDate = new Date();
     }
@@ -57,22 +61,23 @@ export class BrowseComponent implements OnInit {
 
     public insert() 
     {
-        this.db.execWithParams("INSERT into transactions (name, value, date, id_user, id_account, id_category) VALUES (?,?,?,?,?,?)", ["Nic",10,10000,1,1,1]).then
+        const tr = new Transaction();
+        tr.value = 123;
+        this.transactionService.add(tr).then
         (
             id => 
             {
-                console.log("INSERT RESULT", id);
                 this.fetch();
             }, 
             error => 
             {
-                console.log("INSERT ERROR", error);
+                alert("Error: " + error);
             }
         );
     }
  
     public fetch() {
-        this.db.all("SELECT * from transactions").then
+        this.transactionService.list({}).then
         (
             rows => 
             {
@@ -85,9 +90,7 @@ export class BrowseComponent implements OnInit {
                             "name": rows[row][1],
                             "value": rows[row][2],
                             "date": rows[row][3],
-                            "id_user": rows[row][4],
-                            "id_account": rows[row][5],
-                            "id_category": rows[row][6]
+                            "id_user": rows[row][4]
                         }
                     );
                 }

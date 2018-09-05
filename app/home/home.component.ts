@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as app from "application";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { TransactionService } from "~/shared/services/transaction.service";
 
 @Component({
     selector: "Home",
@@ -9,8 +10,8 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
     styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-
-    constructor() {
+    currentValue: number = 0;
+    constructor(transactionService: TransactionService) {
         // Use the component constructor to inject providers.
     }
 
@@ -21,5 +22,16 @@ export class HomeComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    type(num: number) {
+        this.currentValue = this.currentValue * 10 + num/100;
+    }
+
+    erase() {
+        this.currentValue = (this.currentValue * 100 - (this.currentValue * 100 % 10)) / 1000;
+    }
+
+    save() {
     }
 }
