@@ -9,6 +9,7 @@ import { AppComponent } from "./app.component";
 import { DataBase } from './sqlite/db';
 import { TransactionService } from "~/shared/services/transaction.service";
 import { TransactionDao } from "./shared/dao/transaction.dao";
+import { ModalViewComponent } from "./browse/modal-view";
 
 @NgModule({
     bootstrap: [
@@ -20,11 +21,12 @@ import { TransactionDao } from "./shared/dao/transaction.dao";
         NativeScriptUISideDrawerModule
     ],
     declarations: [
-        AppComponent
+        AppComponent, ModalViewComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
     ],
-    providers: [DataBase, ModalDialogService, TransactionService, TransactionDao]
+    providers: [DataBase, ModalDialogService, TransactionService, TransactionDao],
+    entryComponents: [ModalViewComponent]
 })
 export class AppModule { }
