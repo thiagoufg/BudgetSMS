@@ -3,7 +3,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 import { BrowseRoutingModule } from "./browse-routing.module";
 import { BrowseComponent } from "./browse.component";
-import { ModalViewComponent } from "./modal-view";
+
 
 @NgModule({
     imports: [
@@ -11,11 +11,10 @@ import { ModalViewComponent } from "./modal-view";
         BrowseRoutingModule
     ],
     declarations: [
-        BrowseComponent, ModalViewComponent
+        BrowseComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
-    ],
-    entryComponents: [ModalViewComponent]
+    ]
 })
 export class BrowseModule { }

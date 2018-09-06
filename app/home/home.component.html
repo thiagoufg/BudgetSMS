@@ -1,33 +1,41 @@
 <ActionBar class="action-bar">
-    <!-- 
-    Use the NavigationButton as a side-drawer button in Android
-    because ActionItems are shown on the right side of the ActionBar
-    -->
-    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
-    <!-- 
-    Use the ActionItem for IOS with position set to left. Using the
-    NavigationButton as a side-drawer button in iOS is not possible,
-    because its function is to always navigate back in the application.
-    -->
-    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
-        ios.position="left">
-    </ActionItem>
-    <Label class="action-bar-title" text="Home"></Label>
-</ActionBar>
-<StackLayout>
-    <Label text="0,00"></Label>
-    <GridLayout rows="*, *, *, *" columns="*, *, *">
-        <Label text="1" row="0" col="0"></Label>
-        <Label text="2" row="0" col="1"></Label>
-        <Label text="3" row="0" col="2"></Label>
-        <Label text="4" row="1" col="0"></Label>
-        <Label text="5" row="1" col="1"></Label>
-        <Label text="6" row="1" col="2"></Label>
-        <Label text="7" row="2" col="0"></Label>
-        <Label text="8" row="2" col="1"></Label>
-        <Label text="9" row="2" col="2"></Label>
-        <Label text="(+)" row="3" col="0"></Label>
-        <Label text="0" row="3" col="1"></Label>
-        <Label text="<|" row="3" col="2"></Label>
-    </GridLayout>
-</StackLayout>
+        <!-- 
+        Use the NavigationButton as a side-drawer button in Android
+        because ActionItems are shown on the right side of the ActionBar
+        -->
+        <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+        <!-- 
+        Use the ActionItem for IOS with position set to left. Using the
+        NavigationButton as a side-drawer button in iOS is not possible,
+        because its function is to always navigate back in the application.
+        -->
+        <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+            ios.position="left">
+        </ActionItem>
+        <Label class="action-bar-title" text="Home"></Label>
+    </ActionBar>
+    <StackLayout>
+        <GridLayout rows="*,*,*,*,*,*,*,*,*" columns="*, *, *" style="margin:3em">
+            <Label row="0" colSpan="3"  class="text-center h3 p-0 m-0" [text]='selectedDate | date' (tap)="getDate()"></Label>
+            <TextField row="1" colSpan="3"  class="text-center h3 p-0 m-0" hint="Description" text=""></TextField>
+            <ScrollView orientation="vertical" colSpan="3" row="2" rowSpan="2" col="0" >
+                <FlexboxLayout flexDirection="row" flexWrap="wrap" justifyContent="center" alignItems="center">
+                    <Button *ngFor="let category of categories" class="btn-rounded-lg" [class.bg-primary]="category.id == (selectedCategory || {}).id" [class.bg-muted]="category.id != (selectedCategory || {}).id" [text]="category.name" (tap)="changeCategory(category)" textWrap="true"></Button>
+                </FlexboxLayout>
+            </ScrollView>
+            <Label row="4" colSpan="3" class="h2 font-weight-bold m-0 p-0" [text]="currentValue | currency"></Label>
+            <Button text="1"   (tap)="type(1)" row="5" col="0"></Button>
+            <Button text="2"   (tap)="type(2)" row="5" col="1"></Button>
+            <Button text="3"   (tap)="type(3)" row="5" col="2"></Button>
+            <Button text="4"   (tap)="type(4)" row="6" col="0"></Button>
+            <Button text="5"   (tap)="type(5)" row="6" col="1"></Button>
+            <Button text="6"   (tap)="type(6)" row="6" col="2"></Button>
+            <Button text="7"   (tap)="type(7)" row="7" col="0"></Button>
+            <Button text="8"   (tap)="type(8)" row="7" col="1"></Button>
+            <Button text="9"   (tap)="type(9)" row="7" col="2"></Button>
+            <Button text="<|"  (tap)="erase()" row="8" col="0"></Button>
+            <Button text="0"   (tap)="type(0)" row="8" col="1"></Button>
+            <Button text="(+)" (tap)="erase()" row="8" col="2"></Button>
+        </GridLayout>
+    </StackLayout>
+    

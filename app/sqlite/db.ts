@@ -6,7 +6,7 @@ import { isDevMode } from '@angular/core';
 export class DataBase 
 {
     public db: any;
-    public connect(dbname: string)
+    public connect(dbname: string = null)
     {
         if(dbname===null)
         {
@@ -55,6 +55,11 @@ export class DataBase
     public execWithParams(sql: string, params: (string | number)[]): Promise<Object>
     {
         return this.db.execSQL(sql,params);
+    }
+
+    public selectWithParams(sql: string, params: (string | number)[]): Promise<Object>
+    {
+        return this.db.get(sql, params);
     }
 
     public all(sql: string): Promise<Object>

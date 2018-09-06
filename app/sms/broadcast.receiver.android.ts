@@ -1,4 +1,7 @@
 import * as application from "application";
+import { TransactionDao } from "~/shared/dao/transaction.dao";
+import { DataBase } from "../sqlite/db";
+import { Transaction } from "../shared/model/transaction";
 var Sqlite = require("nativescript-sqlite");
 
 //@JavaProxy("IncomingSmsBroadcastReceiver")
@@ -28,34 +31,20 @@ class IncomingSmsBroadcastReceiver extends android.content.BroadcastReceiver {
         //android.telephony.SmsMessage[]
         //let smsMessages = [];//android.telephony.SmsMessage.Intents.getMessagesFromIntent(intent);
 
+        const transactionDao = new TransactionDao(null);
+
         for (let i = 0; i < messages.length; i++) {
             const message = android.telephony.SmsMessage.createFromPdu(messages[i] as Array<number>);
             /*
-                        if (message.getDisplayOriginatingAddress() === AppConfig.boxPhoneNumber) {
-                            const intent = new android.content.Intent(AppConfig.incomingSmsIntent);
-                            intent.putExtra("message", message.getMessageBody())
-                            context.getApplicationContext().sendBroadcast(intent);
-                        }
+                if (message.getDisplayOriginatingAddress() === AppConfig.boxPhoneNumber) {
+                    const intent = new android.content.Intent(AppConfig.incomingSmsIntent);
+                    intent.putExtra("message", message.getMessageBody())
+                    context.getApplicationContext().sendBroadcast(intent);
+                }
             */
             console.log("SmsReceiver", "senderNum: " + message.getDisplayOriginatingAddress() + "; message: " + message.getMessageBody());
-            (new Sqlite("budget.db")).then
-                (
-                db => {
-                    db.execSQL("INSERT into transactionss (name, value, date, id_user) VALUES (?, 1, 1, 1)", [message.getDisplayOriginatingAddress() + message.getMessageBody()]).then
-                        (
-                        id => {
-                            console.log("INSERT RESULT", id);
-                        },
-                        error => {
-                            console.log("INSERT ERROR", error);
-                        }
-                        )
-                },
-                error => {
-                    console.log("OPEN DB ERROR", error);
-                }
-                );
-
+            const transaction = new Transaction();
+            transactionDao.add(transaction);
         }
     }
 }

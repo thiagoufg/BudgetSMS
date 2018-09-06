@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataBase } from '../sqlite/db';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "application";
+import { TransactionService } from '~/shared/services/transaction.service';
 
 @Component
 (
@@ -16,9 +17,8 @@ export class SmsInterceptedList implements OnInit
 
     public transactions: Array<any>;
 
-    public constructor(public db: DataBase)
+    public constructor(public transactionService: TransactionService)
     {
-        this.db.connect("budget.db");
     }
 
     public ngOnInit()
@@ -28,7 +28,7 @@ export class SmsInterceptedList implements OnInit
 
     public insert() 
     {
-        this.db.execWithParams("INSERT into transactions (name, value, date, id_user) VALUES (?, ?, ?, ?)", ["Nic", 10, 10000, 1]).then
+        this.transactionService.add(null).then
         (
             id => 
             {
@@ -43,7 +43,7 @@ export class SmsInterceptedList implements OnInit
     }
  
     public fetch() {
-        this.db.all("SELECT * from transactions").then
+        this.transactionService.list({}).then
         (
             rows => 
             {

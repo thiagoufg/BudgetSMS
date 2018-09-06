@@ -27,9 +27,6 @@ export class AppComponent implements OnInit {
             })
             .catch(function() {
               console.log("Uh oh, no permissions - plan B time!");
-              this.items.push({ name: "Apples" });
-              this.items.push({ name: "Bananas" });
-              this.items.push({ name: "Oranges" });
             });
           } 
         this._activatedUrl = "/home";
